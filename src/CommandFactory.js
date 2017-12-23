@@ -3,6 +3,7 @@ class CommandFactory {
     this.types = {}
 
     this.registerType('http', './strategies/HTTP')
+    this.registerType('mssql', './strategies/MSSQL')
     this.registerType('custom', './strategies/Custom')
   }
 

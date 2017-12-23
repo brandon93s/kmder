@@ -4,6 +4,10 @@ class Strategy {
     this.command = command
     this.config = config
     this.instance = instance
+
+    if (this.command.fromArgs) {
+      this.command = this.command.fromArgs(this.args)
+    }
   }
 
   async run () {
