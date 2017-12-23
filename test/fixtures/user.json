@@ -1,0 +1,11 @@
+{
+  "type": "mysql",
+  "connection": {
+    "host": "db4free.net",
+    "user": "kmdtest",
+    "password": "kmd-test",
+    "database": "kmdtest",
+    "connectTimeout": 100000
+  },
+  "query": "SELECT * FROM `users` WHERE `user_name` LIKE '%{0}%'"
+}

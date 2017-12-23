@@ -13,8 +13,8 @@ test(async t => {
     }
   })
 
-  const command = 'help'
-  const args = []
+  const command = 'user'
+  const args = ['bob']
 
   const kmd = new Command({ config, command, args })
   await kmd.run()
