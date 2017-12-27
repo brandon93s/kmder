@@ -5,6 +5,7 @@ class CommandFactory {
     this.registerType('http', './strategies/HTTP')
     this.registerType('mssql', './strategies/MSSQL')
     this.registerType('mysql', './strategies/MySQL')
+    this.registerType('elasticsearch', './strategies/Elasticsearch')
     this.registerType('custom', './strategies/Custom')
   }
 

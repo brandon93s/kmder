@@ -1,4 +1,5 @@
 const Table = require('cli-table')
+const prettyjson = require('prettyjson')
 
 class Reporter {
   static log (value) {
@@ -28,6 +29,10 @@ class Reporter {
     rows.forEach(r => table.push(r))
 
     console.log(table.toString())
+  }
+
+  static prettyJson (value) {
+    console.log(prettyjson.render(value))
   }
 }
 
