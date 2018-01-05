@@ -51,11 +51,16 @@ class Command {
         if (fstat.isFile()) {
           await this._addCommand(sourcePath)
         } else if (fstat.isDirectory()) {
-          await this._loadCommands(await readdir(value), sourcePath)
+          await this._loadCommands(await readdir(sourcePath), sourcePath)
         }
       } catch (err) {
-        // TODO: Handle cleanup on `ENOENT`
-        console.log(value)
+        if (err.code === 'ENOENT') {
+          let sources = this.config.get('sources')
+          delete sources[key]
+          this.config.set('sources', sources)
+        } else {
+          throw err
+        }
       }
     }
   }
