@@ -60,9 +60,7 @@ class Command {
         }
       } catch (err) {
         if (err.code === 'ENOENT') {
-          let sources = this.config.get('sources')
-          delete sources[key]
-          this.config.set('sources', sources)
+          this.config.delete(`sources.${key}`)
         } else {
           throw err
         }
