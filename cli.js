@@ -21,8 +21,12 @@ if (command === 'reset') {
   process.exit(0)
 }
 
-new Command({ config, command, args })
-  .run()
-  .catch(err => {
+;(async () => {
+  const cli = new Command({ config, command, args })
+  try {
+    await cli.run()
+    await cli.log()
+  } catch (err) {
     if (err.message.includes('No kmd found')) { console.error(err.message) } else throw err
-  })
+  }
+})()

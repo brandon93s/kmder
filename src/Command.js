@@ -14,7 +14,9 @@ class Command {
     this.config = config
     this.command = lower(command)
     this.args = args
+
     this.result = undefined
+    this.cmd = undefined
 
     this.commands = new Map()
     this.factory = new Factory()
@@ -25,15 +27,18 @@ class Command {
 
     // Find appropriate strategy for specified command
     const commandConfiguration = this.commands.get(this.command)
-    if (!commandConfiguration) throw new Error(`No kmd found matching '${this.command}'`)
+    if (!commandConfiguration) {
+      throw new Error(`No kmd found matching '${this.command}'`)
+    }
     const Strategy = this.factory.findStrategy(commandConfiguration.type)
 
     // Execute command using strategy
-    const cmd = new Strategy(this.args, commandConfiguration, this.config, this)
-    this.result = await cmd.run()
+    this.cmd = new Strategy(this.args, commandConfiguration, this.config, this)
+    this.result = await this.cmd.run()
+  }
 
-    // Log results
-    cmd.log(Reporter, this.result)
+  async log () {
+    this.cmd.log(Reporter, this.result)
   }
 
   async _init () {
