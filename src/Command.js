@@ -3,9 +3,9 @@ const path = require('path')
 const Factory = require('./CommandFactory')
 const Reporter = require('./Reporter')
 const promisify = require('./utils/promisify')
+const globby = require('globby')
 
 const stat = promisify(fs.stat)
-const readdir = promisify(fs.readdir)
 
 const lower = str => str && String.prototype.toLowerCase.call(str)
 
@@ -54,9 +54,12 @@ class Command {
         const fstat = await stat(sourcePath)
 
         if (fstat.isFile()) {
-          await this._addCommand(sourcePath)
+          await this._addCommand(sourcePath, key)
         } else if (fstat.isDirectory()) {
-          await this._loadCommands(await readdir(sourcePath), sourcePath)
+          const paths = await globby(['**/*{.js,.json}'], {cwd: sourcePath, absolute: true})
+          for (const match of paths) {
+            this._addCommand(match, key)
+          }
         }
       } catch (err) {
         if (err.code === 'ENOENT') {
@@ -68,10 +71,10 @@ class Command {
     }
   }
 
-  async _addCommand (file) {
+  async _addCommand (file, source) {
     const name = path.parse(file).name
     const command = require(file)
-    this.commands.set(lower(name), Object.assign({file}, command))
+    this.commands.set(lower(name), Object.assign({file, source}, command))
   }
 }
 

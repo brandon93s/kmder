@@ -29,4 +29,6 @@ if (command === 'reset') {
   } catch (err) {
     if (err.message.includes('No kmd found')) { console.error(err.message) } else throw err
   }
+
+  process.exit()
 })()
