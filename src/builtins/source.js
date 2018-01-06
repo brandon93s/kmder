@@ -15,36 +15,23 @@ const ls = config => {
   return msg || 'No kmd sources found'
 }
 
-const add = (args, config) => {
-  const name = args[0]
-  const path = args[1]
-
+const add = ([name, path], config) => {
   if (!name || !path) return `<name> and <path> are required`
 
-  const sources = config.get('sources')
-  sources[name] = path
-  config.set('sources', sources)
+  config.set(`sources.${name}`, path)
 
   return `${name} source added`
 }
 
-const rm = (args, config) => {
-  const name = args[0]
-
+const rm = ([name], config) => {
   if (!name) return `<name> is required`
 
-  const sources = config.get('sources')
-  if (!sources[name]) return `No source '${name}' found`
-  delete sources[name]
-  config.set('sources', sources)
+  config.delete(`sources.${name}`)
 
   return `${name} source removed`
 }
 
-module.exports.run = async (args, config) => {
-  const subCmd = args[0] || 'help'
-  const subArgs = args.slice(1)
-
+module.exports.run = ([subCmd = 'help', ...subArgs], config) => {
   switch (subCmd.toLowerCase()) {
     case 'ls':
     case 'list':

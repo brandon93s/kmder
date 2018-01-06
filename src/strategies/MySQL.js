@@ -6,9 +6,9 @@ class MySQL extends Strategy {
   async run () {
     const connection = await mysql.createConnection(this.command.connection)
 
-    let rows, fields
+    let rows
     try {
-      [rows, fields] = await connection.query(this.query())
+      [rows] = await connection.query(this.query())
     } finally {
       connection.destroy()
     }

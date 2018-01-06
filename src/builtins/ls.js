@@ -7,6 +7,6 @@ const ls = instance => {
   return msg || 'No kmd found'
 }
 
-module.exports.run = async (args, config, instance) => {
+module.exports.run = (args, config, instance) => {
   return ls(instance)
 }

@@ -7,4 +7,4 @@ const help = `
   reset              Reset sources and settings
 `
 
-module.exports.run = async () => help
+module.exports.run = () => help
