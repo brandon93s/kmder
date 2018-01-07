@@ -1,10 +1,13 @@
 import test from 'ava'
 import Conf from 'conf'
 import path from 'path'
+import tempy from 'tempy'
 import Command from '../src/Command'
 
+const conf = () => new Conf({ cwd: tempy.directory() })
+
 test('should load single files', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {
     a: path.join(__dirname, '/fixtures/sources/source/a.js'),
     b: path.join(__dirname, '/fixtures/sources/source/b.js')
@@ -19,7 +22,7 @@ test('should load single files', async t => {
 })
 
 test('should load directories', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {
     a: path.join(__dirname, '/fixtures/sources/source')
   })
@@ -33,7 +36,7 @@ test('should load directories', async t => {
 })
 
 test('should recurse directories', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {
     a: path.join(__dirname, '/fixtures/sources/')
   })
@@ -47,7 +50,7 @@ test('should recurse directories', async t => {
 })
 
 test('should remove sources that no longer exist', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {
     a: path.join(__dirname, '/not/found/directory')
   })
@@ -59,7 +62,7 @@ test('should remove sources that no longer exist', async t => {
 })
 
 test('should lowercase command names', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {
     a: path.join(__dirname, '/fixtures/kmds/UPPERCASE.js')
   })
@@ -73,7 +76,7 @@ test('should lowercase command names', async t => {
 })
 
 test('should throw on kmd not found', async t => {
-  const config = new Conf()
+  const config = conf()
   config.set('sources', {})
 
   const c = new Command({ config, command: 'unicorn', args: [] })
