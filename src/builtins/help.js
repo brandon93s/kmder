@@ -1,9 +1,9 @@
 const help = `
   <kmd> <..args>     Execute kmd
-  ls                 List available kmd
+  ls                 List available kmd(s)
   help               Display help
   source             Manage kmd sources
-  version            List kmd version
+  version            List kmder version
   reset              Reset sources and settings
 `
 
