@@ -34,7 +34,12 @@ class Command {
 
     // Execute command using strategy
     this.cmd = new Strategy(this.args, commandConfiguration, this.config, this)
-    this.result = await this.cmd.run()
+
+    try {
+      this.result = await this.cmd.run()
+    } catch (err) {
+      this.result = err
+    }
   }
 
   async log () {
