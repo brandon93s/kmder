@@ -1,5 +1,0 @@
-{
-    "type": "http",
-    "url": "https://api.fixer.io/latest?base={0}&symbols={1}",
-    "jp": "$.rates.{1}"
-}
