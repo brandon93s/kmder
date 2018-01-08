@@ -14,8 +14,12 @@ class Strategy {
     throw new Error('`run` not implemented')
   }
 
-  async log (Reporter, values) {
-    Reporter.log(values)
+  async log (Reporter, value) {
+    if (this.command.log) {
+      this.command.log(Reporter, value)
+    } else {
+      Reporter.log(value)
+    }
   }
 }
 
