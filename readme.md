@@ -1,6 +1,6 @@
 <h3 align="center">
   <br>
-  <img width="400" src="https://cdn.rawgit.com/brandon93s/kmder/afbd26a6/media/logo.svg" alt="kmder" />
+  <img width="400" src="https://rawgit.com/brandon93s/kmder/master/media/logo.svg" alt="kmder" />
   <br>
     <br>
 </h3>
