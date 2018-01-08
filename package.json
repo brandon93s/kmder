@@ -23,10 +23,12 @@
     "globby": "^7.1.1",
     "got": "^8.0.1",
     "jsonpath": "^1.0.0",
-    "msnodesqlv8": "^0.4.7",
     "mssql": "^4.1.0",
     "mysql2": "^1.5.1",
     "prettyjson": "^1.2.1"
+  },
+  "optionalDependencies": {
+    "msnodesqlv8": "^0.4.7"
   },
   "devDependencies": {
     "ava": "^0.24.0",

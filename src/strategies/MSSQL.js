@@ -1,4 +1,4 @@
-const sql = require('mssql/msnodesqlv8')
+const sql = process.platform === 'win32' ? require('mssql/msnodesqlv8') : require('mssql')
 const Strategy = require('../Strategy')
 const format = require('../utils/format')
 
