@@ -1,6 +1,6 @@
 {
   "name": "kmder",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./src/Command.js",
   "author": "Brandon Smith",
   "license": "MIT",
