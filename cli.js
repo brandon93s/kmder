@@ -2,7 +2,9 @@
 
 const Conf = require('conf')
 const Command = require('./src/Command')
+const delay = require('./src/utils/delay')
 const path = require('path')
+const ora = require('ora')
 
 const config = new Conf({
   defaults: {
@@ -22,12 +24,22 @@ if (command === 'reset') {
 }
 
 ;(async () => {
+  const spinner = ora('Running...')
+  delay(100).then(() => spinner.start())
+
   const cli = new Command({ config, command, args })
+
   try {
     await cli.run()
+    spinner.clear()
     await cli.log()
   } catch (err) {
-    if (err.message.includes('No kmd found')) { console.error(err.message) } else throw err
+    if (err.message.includes('No kmd found')) {
+      spinner.fail(err.message)
+    } else {
+      spinner.fail('An error occurred')
+      throw err
+    }
   }
 
   process.exit()
